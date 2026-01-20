@@ -1,4 +1,4 @@
-mport streamlit as st
+import streamlit as st
 from groq import Groq
 
 st.set_page_config("PragyanAI Content Generator", layout="wide")
@@ -32,4 +32,3 @@ with col2:
         )
     else:
         st.info("Generate content first")
-syz-cdiw-tam
