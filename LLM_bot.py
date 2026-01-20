@@ -2,7 +2,7 @@ import streamlit as st
 from groq import Groq
 import urllib.parse
 
-st.set_page_config("PragyanAI Content Generator", layout="wide")
+st.set_page_config("My Content Generator", layout="wide")
 st.title("📢 Nandini's Content Generator")
 
 # Groq client
