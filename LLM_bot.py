@@ -2,7 +2,7 @@ import streamlit as st
 from groq import Groq
 
 st.set_page_config("PragyanAI Content Generator", layout="wide")
-st.title("📢 PragyanAI – Content Generator")
+st.title("📢 Nandini's– Content Generator")
 
 client = Groq(api_key=st.secrets["GROQ"]["GROQ_API_KEY"])
 
