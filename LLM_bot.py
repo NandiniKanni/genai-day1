@@ -5,7 +5,7 @@ from groq import Groq
 st.set_page_config("PragyanAI Content Generator", layout="wide")
 st.title("📢 Nandini's– Content Generator")
 
-client = Groq(api_key=st.secrets["GROQ"]["GROQ_API_KEY"])
+client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 openai_client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 
