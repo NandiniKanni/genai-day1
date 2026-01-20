@@ -12,7 +12,7 @@ HF_API_KEY = st.secrets["HF"]["HF_API_KEY"]
 
 # ---------------- IMAGE FUNCTION ----------------
 def generate_image(prompt):
-    API_URL = "https://router.huggingface.co/hf-inference/models/runwayml/stable-diffusion-v1-5"
+    API_URL = "https://router.huggingface.co/hf-inference/models/stabilityai/sdxl-turbo"
 
     headers = {
         "Authorization": f"Bearer {HF_API_KEY}",
@@ -23,22 +23,14 @@ def generate_image(prompt):
         "inputs": prompt
     }
 
-    for attempt in range(3):
-        response = requests.post(API_URL, headers=headers, json=payload)
+    response = requests.post(API_URL, headers=headers, json=payload)
 
-        if response.status_code == 200:
-            return response.content
+    if response.status_code == 200:
+        return response.content
+    else:
+        st.error(f"HF Error {response.status_code}: {response.text}")
+        return None
 
-        elif response.status_code == 503:
-            st.info("⏳ Waking up image model... please wait")
-            import time
-            time.sleep(8)
-
-        else:
-            st.error(f"HF Error {response.status_code}: {response.text}")
-            return None
-
-    return None
 
 
 
