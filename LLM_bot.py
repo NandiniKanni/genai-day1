@@ -16,12 +16,23 @@ def generate_image(prompt):
     headers = {"Authorization": f"Bearer {HF_API_KEY}"}
     payload = {"inputs": prompt}
 
-    response = requests.post(API_URL, headers=headers, json=payload)
+    for attempt in range(3):  # retry 3 times
+        response = requests.post(API_URL, headers=headers, json=payload)
 
-    if response.status_code != 200:
-        return None
+        if response.status_code == 200:
+            return response.content
 
-    return response.content
+        elif response.status_code == 503:
+            st.info("⏳ Waking up image model... retrying")
+            import time
+            time.sleep(8)  # wait for model to load
+
+        else:
+            st.error(f"Error {response.status_code}: {response.text}")
+            return None
+
+    return None
+
 
 # ---------------- UI ----------------
 col1, col2 = st.columns(2)
